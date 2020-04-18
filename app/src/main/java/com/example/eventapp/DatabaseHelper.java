@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 public class DatabaseHelper extends SQLiteOpenHelper {
     SQLiteDatabase db;
     public DatabaseHelper(@Nullable Context context) {
-        super(context, "EventApp.db", null, 1);
+        super(context, "Event.db", null, 1);
         db= this.getWritableDatabase();
 
     }
@@ -19,6 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
             db.execSQL("create table register (id integer primary key autoincrement, name text,email text, college text, mobile integer, password text)");
+            db.execSQL("create table eventDetails (id integer primary key autoincrement, eventname text,dept text, pocname text, pocmobile text, pocemail text, date text, time text,location text, entryfee text)");
     }
 
     @Override
@@ -26,6 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    //inserting participants details
     public  boolean insertData(String name, String email, String college, String mobile, String password)
     {
      SQLiteDatabase db= this.getWritableDatabase();
@@ -61,4 +63,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return  false;
         }
     }
+
+    //inserting event details
+    public boolean insertEvent(String eventName,String desc,String poc, String pocmob,String pocemail,String date,String time, String location, String fee) {
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+        contentValues.put("eventname",eventName);
+        contentValues.put("dept",desc);
+        contentValues.put("pocname",poc);
+        contentValues.put("pocmobile",pocmob);
+        contentValues.put("pocemail",pocemail);
+        contentValues.put("date",date);
+        contentValues.put("time",time);
+        contentValues.put("location",location);
+        contentValues.put("entryfee",fee);
+        long res=db.insert("eventDetails",null,contentValues);
+        if(res== -1)
+        {
+            return false;
+        }
+        else
+        {
+            return  true;
+        }
+    }
+
 }
