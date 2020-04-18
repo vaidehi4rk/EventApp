@@ -33,7 +33,7 @@ public class AddEvent extends AppCompatActivity
 
         db=new DatabaseHelper(this);
 
-      //  eventid=(EditText)findViewById(R.id.eventid);
+      
         eventName=(EditText)findViewById(R.id.eventName);
         Desc=(EditText)findViewById(R.id.Desc);
         poc=(EditText)findViewById(R.id.poc);
