@@ -132,7 +132,7 @@
         android:background="@drawable/et_style"
         android:ems="10"
         android:gravity="center"
-        android:hint="*01/01/1998* format"
+        android:hint="*yyyy/mm/dd* format"
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:textColor="#0274be"

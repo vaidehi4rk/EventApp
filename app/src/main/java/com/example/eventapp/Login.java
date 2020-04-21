@@ -3,6 +3,7 @@ package com.example.eventapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,7 @@ public class Login extends AppCompatActivity {
     Button btnLogin;
     TextView signuptext;
     DatabaseHelper db;
+    Cursor records;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +52,36 @@ public class Login extends AppCompatActivity {
                 }
                 else
                 {
-                    String uname=username.getText().toString();
+                    records = db.getRecords();
+                    int flag=0;
+                    int id=0;
+
+                    while (records.moveToNext()) {
+                        id=Integer.parseInt(records.getString(0));
+                        String u = records.getString(1);
+                        String p = records.getString(2);
+                        if (username.getText().toString().equals(u) && password.getText().toString().equals(p)) {
+                            flag = 1;
+
+                            //session variables
+                            User user=new User(Login.this);
+                            user.setId(id);
+                            user.setName(u);
+                            Intent i = new Intent(getApplicationContext(), HomePage.class);
+                            i.putExtra("id",id);
+                            i.putExtra("name",u);
+                            startActivity(i);
+                        }
+                    }
+                    if (flag == 1) {
+
+                        Toast.makeText(getApplicationContext(), " LOGIN SUCCESSFUL", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Username or password is incorrect", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                    /*String uname=username.getText().toString();
                     String pwd=password.getText().toString();
                     Boolean result= db.logincheck(uname,pwd);
                     if(result==true)
@@ -62,11 +93,11 @@ public class Login extends AppCompatActivity {
                     else
                     {
                         Toast.makeText(getApplicationContext(),"Wrong Email or Password! Please Try Again!",Toast.LENGTH_LONG).show();
-                    }
+                    }*/
                 }
 
 
-            }
-        });
-    }
+            });
+        }
+
 }

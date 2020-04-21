@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contentPanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backa"
+    android:orientation="vertical"
+    tools:context=".myProfile">
+
+
+    <EditText
+        android:id="@+id/uName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="#FFFFFF"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/uEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="#FFFFFF"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/uCollege"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:textColor="#FFFFFF"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/uMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:textColor="#FFFFFF"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/uPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:textColor="#FFFFFF"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/updateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="155dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/btn"
+        android:text="Edit"
+        android:textColor="#3f9fff"
+        android:textSize="18dp"
+        app:fontFamily="@font/armata">
+
+    </Button>
+
+
+
+
+    <TextView
+        android:id="@+id/Goback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFF"
+        android:text="Go back to home page"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="50dp">
+
+    </TextView>
+
+
+</LinearLayout>

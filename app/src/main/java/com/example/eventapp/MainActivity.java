@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     TextView Splash,btnwelcome;
     View bgpprogress,bgpprogresstop;;
     Animation imgpage,ltr,btntwo,btnthree;
+    User user;
 
     //private static int SPLASH_SCREEN_TIME_OUT=2000;
     @Override
@@ -68,11 +69,52 @@ public class MainActivity extends AppCompatActivity {
         btnwelcome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(MainActivity.this, Login.class);
-                startActivity(intent);
+               // Intent intent= new Intent(MainActivity.this, Login.class);
+                //startActivity(intent);
+
+                if(user.getId()!=0  && user.getName() !="")
+                {
+                    Intent i= new Intent(MainActivity.this, HomePage.class);
+                    i.putExtra("name",user.getName());
+                    i.putExtra("id",user.getId());
+                    startActivity(i);
+                    finish();
+                }
+
+                else
+                {
+                    Intent i=new Intent(getApplicationContext(),Login.class);
+                    startActivity(i);
+                    finish();
+                }
             }
+
+            /*public  void run()
+                {
+                    if(user.getId()!=0)
+                    {
+                        Intent intent= new Intent(MainActivity.this, HomePage.class);
+                        startActivity(intent);
+                    }
+
+                    else
+                    {
+                        Intent i=new Intent(getApplicationContext(),Login.class);
+                        startActivity(i);
+                        finish();
+                    }
+
+                }
+*/
+
         });
+        user= new User(MainActivity.this);
+
 
 
     }
+
+
+
+
 }

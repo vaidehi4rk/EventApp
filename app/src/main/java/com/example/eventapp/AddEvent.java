@@ -33,7 +33,7 @@ public class AddEvent extends AppCompatActivity
 
         db=new DatabaseHelper(this);
 
-      
+
         eventName=(EditText)findViewById(R.id.eventName);
         Desc=(EditText)findViewById(R.id.Desc);
         poc=(EditText)findViewById(R.id.poc);
@@ -59,7 +59,7 @@ public class AddEvent extends AppCompatActivity
                 if(res== true)
                 {
                     Toast.makeText(AddEvent.this, "Event details added successfully!", Toast.LENGTH_LONG).show();
-                    Intent intent= new Intent(AddEvent.this,Login.class);
+                    Intent intent= new Intent(AddEvent.this,AdminHome.class);
                     startActivity(intent);
 
                 }

@@ -8,10 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+
 public class DatabaseHelper extends SQLiteOpenHelper {
     SQLiteDatabase db;
     public DatabaseHelper(@Nullable Context context) {
-        super(context, "Event.db", null, 1);
+        super(context, "Event17.db", null, 1);
         db= this.getWritableDatabase();
 
     }
@@ -19,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
             db.execSQL("create table register (id integer primary key autoincrement, name text,email text, college text, mobile integer, password text)");
-            db.execSQL("create table eventDetails (id integer primary key autoincrement, eventname text,dept text, pocname text, pocmobile text, pocemail text, date text, time text,location text, entryfee text)");
+            db.execSQL("create table eventDetails (id integer primary key autoincrement, eventname text,dept text, pocname text, pocmobile text, pocemail text, date date, time text,location text, entryfee text)");
     }
 
     @Override
@@ -69,7 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues contentValues= new ContentValues();
         contentValues.put("eventname",eventName);
-        contentValues.put("dept",desc);
+        contentValues.put("desc",desc);
         contentValues.put("pocname",poc);
         contentValues.put("pocmobile",pocmob);
         contentValues.put("pocemail",pocemail);
@@ -88,4 +89,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    //getting  only id ,name , password
+    public Cursor getRecords() {
+        db=this.getWritableDatabase();
+        Cursor res=db.rawQuery("select id,name,password from register",null);
+        return res;
+    }
+
+
+    //getting all records of user
+    public Cursor getUserRecords() {
+        db=this.getWritableDatabase();
+        Cursor res=db.rawQuery("select * from register",null);
+        return res;
+    }
+
+    //update user profile details
+    public boolean updateUser(Integer id,String name, String email, String college, String mobile ,String password)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        /*ContentValues contentValues= new ContentValues();
+        contentValues.put("name",name);
+        contentValues.put("email",email);
+        contentValues.put("college",college);
+        contentValues.put("mobile",mobile);
+        contentValues.put("password",password);
+        //res= db.execSQL("update  register set name='"+name+"', email='"+email+"', college='"+college+"', mobile='"+mobile+"',password='"+password+"'");
+        long res=db.update("register",contentValues,"id=?",null);*/
+
+        db.execSQL("UPDATE register SET name = '"+name+"',email='"+email+"',college='"+college+"',mobile='"+mobile+"',password='"+password+"' WHERE id = "+id);
+        return true;
+
+        /*if(res==-1)
+            return false;
+        else
+            return true;*/
+    }
 }
