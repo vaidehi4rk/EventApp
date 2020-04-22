@@ -10,7 +10,7 @@ import android.widget.ImageView;
 public class AdminHome extends AppCompatActivity {
 
 
-    ImageView event;
+    ImageView event,ViewEvents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +20,10 @@ public class AdminHome extends AppCompatActivity {
 
 
         event=(ImageView)findViewById(R.id.addevents);
+        ViewEvents=(ImageView)findViewById(R.id.ViewEvents);
 
 
-
+        //add events
         event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,5 +31,15 @@ public class AdminHome extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+       //viewevents
+        ViewEvents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminHome.this,ViewEvents.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

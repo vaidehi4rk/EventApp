@@ -5,36 +5,152 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
-public class HomePage extends AppCompatActivity {
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
-    TextView welcome,uname,logout;
+public class HomePage extends AppCompatActivity {
     User user;
     int id=0;
     String name;
+    Cursor data;
+    Button ongoing,upgoing;
+    DatabaseHelper db;
+    ArrayList<Ongoing> oEvents;
+    ListView listView;
+    Ongoing o;
+       String date,name1;
+    StringBuffer c1;
+    LinearLayout layout;
+    homepage_listadapter adpt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        ongoing=(Button)findViewById(R.id.ongoing);
+        upgoing=(Button)findViewById(R.id.upcoming);
+       layout=(LinearLayout)findViewById(R.id.linear);
+        listView = (ListView)findViewById(R.id.listview1);
 
 
 
 
-        welcome=(TextView) findViewById(R.id.name);
-        uname=(TextView)findViewById(R.id.username);
-        logout=(TextView)findViewById(R.id.logout);
+        db = new DatabaseHelper(this);
+        oEvents= new ArrayList<>();
+
+       //upcoming events
+        upgoing.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //layout.removeView(listView);
+//                if(!adpt.isEmpty()) {
+//                    adpt.clear();
+//                    adpt.notifyDataSetChanged();
+//                }
+//                if(adpt!=null)
+//                {
+//                    adpt.clear();
+//                    adpt.notifyDataSetChanged();
+//                    listView.setAdapter(null);
+//                }
+                //listView.setAdapter(null);
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String getCurrentDateTime = sdf.format(c.getTime());
+                data=db.getEventRecords();
+                Integer compare;
+                c1=new StringBuffer();
+                while(data.moveToNext())
+
+                {
+                    name1=data.getString(1);
+                    date = data.getString(6);
+                    compare = getCurrentDateTime.compareTo(date);
+                    if (compare < 0)
+                    {
+                        o = new Ongoing(name1,date);
+                        oEvents.add(o);
+                       // c1.append(name1+" "+date+"\n");
+                    }
+
+                }
+
+               // Toast.makeText(HomePage.this, c1.toString(), Toast.LENGTH_SHORT).show();
+                adpt=new homepage_listadapter(HomePage.this,R.layout.homepage_list_adapter,oEvents);
+               listView.setAdapter(null);
+               listView.setVisibility(View.GONE);
+               listView.setAdapter(adpt);
+                listView.setVisibility(View.VISIBLE);
+
+
+            }
+        });
+
+        //ongoing events
+        ongoing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Get Current Date Time
+                //adpt.clear();
+                //listView.setAdapter(null);
+//                if(adpt!=null)
+//                {
+//                    adpt.clear();
+//                    adpt.notifyDataSetChanged();
+//                    listView.setAdapter(null);
+//                }
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String getCurrentDateTime = sdf.format(c.getTime());
+                data=db.getEventRecords();
+                Integer compare;
+                c1=new StringBuffer();
+                while(data.moveToNext())
+
+                {
+                    name1=data.getString(1);
+                    date = data.getString(6);
+                    compare = getCurrentDateTime.compareTo(date);
+                    if (compare >= 0)
+                    {
+                        o = new Ongoing(name1,date);
+                        oEvents.add(o);
+                        c1.append(name1+" "+date+"\n");
+                    }
+
+                }
+
+                Toast.makeText(HomePage.this, c1.toString(), Toast.LENGTH_SHORT).show();
+                adpt=new homepage_listadapter(HomePage.this,R.layout.homepage_list_adapter,oEvents);
+                listView.setAdapter(adpt);
+                ongoing.setEnabled(false);
+                upgoing.setEnabled(true);
+
+
+            }
+        });
 
         //session
         user=new User(HomePage.this);
@@ -42,19 +158,9 @@ public class HomePage extends AppCompatActivity {
         name=getIntent().getExtras().getString("name");
 
 
-        uname.setText(name);
-
-
-
     }
 
-    /*public void logout(View view) {
-        new User(HomePage.this).removeUser();
-        Intent i= new Intent(getApplicationContext(), Login.class);
-        startActivity(i);
-        finish();
-    }*/
-
+//title bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater= getMenuInflater();
@@ -82,6 +188,8 @@ public class HomePage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    //logout
     private void showRegistersDialog1() {
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
 
@@ -108,5 +216,5 @@ public class HomePage extends AppCompatActivity {
                 .setNegativeButton("No", dialogClickListener).show();
 
     }
-    }
+}
 

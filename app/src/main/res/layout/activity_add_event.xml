@@ -133,7 +133,7 @@
         android:ems="10"
         android:gravity="center"
         android:hint="*yyyy/mm/dd* format"
-        android:inputType="textPersonName"
+        android:inputType="date"
         android:textAlignment="center"
         android:textColor="#0274be"
         android:textColorHint="#3f9fff"

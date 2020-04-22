@@ -21,6 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
             db.execSQL("create table register (id integer primary key autoincrement, name text,email text, college text, mobile integer, password text)");
             db.execSQL("create table eventDetails (id integer primary key autoincrement, eventname text,dept text, pocname text, pocmobile text, pocemail text, date date, time text,location text, entryfee text)");
+
     }
 
     @Override
@@ -104,6 +105,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    //get all event details
+    public Cursor getEventRecords() {
+        db=this.getWritableDatabase();
+        Cursor res=db.rawQuery("select * from eventDetails",null);
+        return res;
+    }
+
+
     //update user profile details
     public boolean updateUser(Integer id,String name, String email, String college, String mobile ,String password)
     {
@@ -125,4 +134,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             return true;*/
     }
+
+    /*public  boolean deleteEvent()
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE FROM eventDetails WHERE eventname='gk quiz'");
+        return true;
+
+    }*/
 }
