@@ -34,12 +34,15 @@ public class HomePage extends AppCompatActivity {
     Button ongoing,upgoing;
     DatabaseHelper db;
     ArrayList<Ongoing> oEvents;
-    ListView listView;
+    ArrayList<Upcoming> uEvents;
+    ListView listView,listView2;
     Ongoing o;
-       String date,name1;
+    Upcoming u;
+    String date,name1;
     StringBuffer c1;
     LinearLayout layout;
     homepage_listadapter adpt;
+    upcoming_list_adapter adp;
 
 
     @Override
@@ -51,30 +54,21 @@ public class HomePage extends AppCompatActivity {
         upgoing=(Button)findViewById(R.id.upcoming);
        layout=(LinearLayout)findViewById(R.id.linear);
         listView = (ListView)findViewById(R.id.listview1);
+        listView2 = (ListView)findViewById(R.id.listview2);
 
 
 
 
         db = new DatabaseHelper(this);
         oEvents= new ArrayList<>();
+        uEvents=new ArrayList<>();
 
        //upcoming events
         upgoing.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                //layout.removeView(listView);
-//                if(!adpt.isEmpty()) {
-//                    adpt.clear();
-//                    adpt.notifyDataSetChanged();
-//                }
-//                if(adpt!=null)
-//                {
-//                    adpt.clear();
-//                    adpt.notifyDataSetChanged();
-//                    listView.setAdapter(null);
-//                }
-                //listView.setAdapter(null);
+
                 Calendar c = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 String getCurrentDateTime = sdf.format(c.getTime());
@@ -89,20 +83,22 @@ public class HomePage extends AppCompatActivity {
                     compare = getCurrentDateTime.compareTo(date);
                     if (compare < 0)
                     {
-                        o = new Ongoing(name1,date);
-                        oEvents.add(o);
+                        u = new Upcoming(name1,date);
+                        uEvents.add(u);
                        // c1.append(name1+" "+date+"\n");
                     }
 
                 }
+                listView2.setVisibility(View.VISIBLE);
+                listView.setVisibility(View.GONE);
 
                // Toast.makeText(HomePage.this, c1.toString(), Toast.LENGTH_SHORT).show();
-                adpt=new homepage_listadapter(HomePage.this,R.layout.homepage_list_adapter,oEvents);
-               listView.setAdapter(null);
-               listView.setVisibility(View.GONE);
-               listView.setAdapter(adpt);
-                listView.setVisibility(View.VISIBLE);
+                adp=new upcoming_list_adapter(HomePage.this,R.layout.upcoming_list_adapter,uEvents);
+               listView2.setAdapter(adp);
+               upgoing.setEnabled(false);
+               ongoing.setEnabled(true);
 
+              //  listView.setVisibility(View.VISIBLE);
 
             }
         });
@@ -112,15 +108,6 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // Get Current Date Time
-                //adpt.clear();
-                //listView.setAdapter(null);
-//                if(adpt!=null)
-//                {
-//                    adpt.clear();
-//                    adpt.notifyDataSetChanged();
-//                    listView.setAdapter(null);
-//                }
                 Calendar c = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 String getCurrentDateTime = sdf.format(c.getTime());
@@ -141,21 +128,25 @@ public class HomePage extends AppCompatActivity {
                     }
 
                 }
+                listView2.setVisibility(View.GONE);
+                listView.setVisibility(View.VISIBLE);
 
-                Toast.makeText(HomePage.this, c1.toString(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(HomePage.this, c1.toString(), Toast.LENGTH_SHORT).show();
                 adpt=new homepage_listadapter(HomePage.this,R.layout.homepage_list_adapter,oEvents);
                 listView.setAdapter(adpt);
                 ongoing.setEnabled(false);
-                upgoing.setEnabled(true);
+               upgoing.setEnabled(true);
 
-
+                //Toast.makeText(HomePage.this,v,Toast.LENGTH_LONG).show();
+                Toast.makeText(HomePage.this,v+" value",Toast.LENGTH_LONG).show();
             }
+
         });
 
         //session
         user=new User(HomePage.this);
         id=getIntent().getExtras().getInt("id");
-        name=getIntent().getExtras().getString("name");
+      //  name=getIntent().getExtras().getString("name");
 
 
     }
