@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -35,7 +36,7 @@ public class HomePage extends AppCompatActivity {
     DatabaseHelper db;
     ArrayList<Ongoing> oEvents;
     ArrayList<Upcoming> uEvents;
-    ListView listView,listView2;
+    ListView listView1,listView2;
     Ongoing o;
     Upcoming u;
     String date,name1;
@@ -52,115 +53,139 @@ public class HomePage extends AppCompatActivity {
 
         ongoing=(Button)findViewById(R.id.ongoing);
         upgoing=(Button)findViewById(R.id.upcoming);
-       layout=(LinearLayout)findViewById(R.id.linear);
-        listView = (ListView)findViewById(R.id.listview1);
+        layout=(LinearLayout)findViewById(R.id.linear);
+        listView1 = (ListView)findViewById(R.id.listview1);
         listView2 = (ListView)findViewById(R.id.listview2);
-
-
-
 
         db = new DatabaseHelper(this);
         oEvents= new ArrayList<>();
         uEvents=new ArrayList<>();
 
-       //upcoming events
-        upgoing.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                Calendar c = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                String getCurrentDateTime = sdf.format(c.getTime());
-                data=db.getEventRecords();
-                Integer compare;
-                c1=new StringBuffer();
-                while(data.moveToNext())
-
-                {
-                    name1=data.getString(1);
-                    date = data.getString(6);
-                    compare = getCurrentDateTime.compareTo(date);
-                    if (compare < 0)
-                    {
-                        u = new Upcoming(name1,date);
-                        uEvents.add(u);
-                       // c1.append(name1+" "+date+"\n");
-                    }
-
-                }
-                listView2.setVisibility(View.VISIBLE);
-                listView.setVisibility(View.GONE);
-
-               // Toast.makeText(HomePage.this, c1.toString(), Toast.LENGTH_SHORT).show();
-                adp=new upcoming_list_adapter(HomePage.this,R.layout.upcoming_list_adapter,uEvents);
-               listView2.setAdapter(adp);
-               upgoing.setEnabled(false);
-               ongoing.setEnabled(true);
-
-              //  listView.setVisibility(View.VISIBLE);
-
-            }
-        });
-
-        //ongoing events
-        ongoing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Calendar c = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                String getCurrentDateTime = sdf.format(c.getTime());
-                data=db.getEventRecords();
-                Integer compare;
-                c1=new StringBuffer();
-                while(data.moveToNext())
-
-                {
-                    name1=data.getString(1);
-                    date = data.getString(6);
-                    compare = getCurrentDateTime.compareTo(date);
-                    if (compare >= 0)
-                    {
-                        o = new Ongoing(name1,date);
-                        oEvents.add(o);
-                        c1.append(name1+" "+date+"\n");
-                    }
-
-                }
-                listView2.setVisibility(View.GONE);
-                listView.setVisibility(View.VISIBLE);
-
-               // Toast.makeText(HomePage.this, c1.toString(), Toast.LENGTH_SHORT).show();
-                adpt=new homepage_listadapter(HomePage.this,R.layout.homepage_list_adapter,oEvents);
-                listView.setAdapter(adpt);
-                ongoing.setEnabled(false);
-               upgoing.setEnabled(true);
-
-                //Toast.makeText(HomePage.this,v,Toast.LENGTH_LONG).show();
-                Toast.makeText(HomePage.this,v+" value",Toast.LENGTH_LONG).show();
-            }
-
-        });
 
         //session
         user=new User(HomePage.this);
         id=getIntent().getExtras().getInt("id");
-      //  name=getIntent().getExtras().getString("name");
+        //  name=getIntent().getExtras().getString("name");
 
 
-    }
 
-//title bar
+        //upcoming events
+        upgoing.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v)
+            {
+                upgoing.setEnabled(false);
+                ongoing.setEnabled(true);
+
+                listView1.setVisibility(View.GONE);
+                listView2.setVisibility(View.VISIBLE);
+
+                if(listView2.getCount() == 0) {
+
+                    Calendar c = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    String getCurrentDateTime = sdf.format(c.getTime());
+                    data = db.getEventRecords();
+                    Integer compare;
+                    c1 = new StringBuffer();
+                    while (data.moveToNext()) {
+                        name1 = data.getString(1);
+                        date = data.getString(6);
+                        compare = getCurrentDateTime.compareTo(date);
+                        if (compare < 0) {
+                            u = new Upcoming(name1, date);
+                            uEvents.add(u);
+                        }
+                    }
+                    adp = new upcoming_list_adapter(HomePage.this, R.layout.upcoming_list_adapter, uEvents);
+                    listView2.setAdapter(adp);
+                }
+            }
+        });
+
+        //ongoing events
+        ongoing.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                ongoing.setEnabled(false);
+                upgoing.setEnabled(true);
+                listView2.setVisibility(View.GONE);
+                listView1.setVisibility(View.VISIBLE);
+
+                if(listView1.getCount() == 0) {
+
+                    Calendar c = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    String getCurrentDateTime = sdf.format(c.getTime());
+                    data = db.getEventRecords();
+                    Integer compare;
+                    c1 = new StringBuffer();
+                    while (data.moveToNext()) {
+                        name1 = data.getString(1);
+                        date = data.getString(6);
+                        compare = getCurrentDateTime.compareTo(date);
+                        if (compare > 0 || compare == 0) {
+                            o = new Ongoing(name1, date);
+                            oEvents.add(o);
+                            c1.append(name1 + " " + date + "\n");
+                            Toast.makeText(HomePage.this, "value   " + c1, Toast.LENGTH_SHORT).show();
+
+                        }
+                        adpt = new homepage_listadapter(HomePage.this, R.layout.homepage_list_adapter, oEvents);
+                        listView1.setAdapter(adpt);
+                    }
+
+                }
+
+            }
+
+        });
+
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final int p=position;
+                TextView nm=(TextView) view.findViewById(R.id.nameE);
+                String namee=nm.getText().toString();
+                Toast.makeText(getApplicationContext(), "position is: "+position+"eventname: "+namee, Toast.LENGTH_SHORT).show();
+                Intent i= new Intent(getApplicationContext(),EventMoreDetails.class);
+                i.putExtra("id",id);
+                i.putExtra("eventname",namee);
+                startActivity(i);
+            }
+        });
+
+        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final int p=position;
+                TextView nm=(TextView) view.findViewById(R.id.nameE);
+                String namee=nm.getText().toString();
+                Toast.makeText(getApplicationContext(), "position is: "+position+"eventname: "+namee, Toast.LENGTH_SHORT).show();
+                Intent i= new Intent(getApplicationContext(),EventMoreDetails.class);
+                i.putExtra("id",id);
+                i.putExtra("eventname",namee);
+                startActivity(i);
+            }
+        });
+   }
+
+    //title bar
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         MenuInflater menuInflater= getMenuInflater();
         menuInflater.inflate(R.menu.options_menu,menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
 
         if(item.getItemId()==R.id.myProfile)
         {
@@ -181,12 +206,16 @@ public class HomePage extends AppCompatActivity {
 
 
     //logout
-    private void showRegistersDialog1() {
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+    private void showRegistersDialog1()
+    {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
+        {
 
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which){
+            public void onClick(DialogInterface dialog, int which)
+            {
+                switch (which)
+                {
                     case DialogInterface.BUTTON_POSITIVE:
                         //Yes button clicked
                         new User(HomePage.this).removeUser();
@@ -203,8 +232,7 @@ public class HomePage extends AppCompatActivity {
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Do You Want To Logout?").setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();
+        builder.setMessage("Do You Want To Logout?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
 
     }
 }

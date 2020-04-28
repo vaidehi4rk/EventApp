@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EventMoreDetails"
+    android:orientation="vertical"
+    android:background="@drawable/bpg">
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/details_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/details_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="20dp"
+            android:layout_marginTop="50dp"/>
+
+        <TextView
+            android:id="@+id/details_poc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="20dp"
+            android:layout_marginTop="90dp"/>
+
+        <TextView
+            android:id="@+id/details_poc_mob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="130dp"
+            android:text="TextView"
+            android:textSize="20dp" />
+
+
+        <TextView
+            android:id="@+id/details_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="20dp"
+            android:layout_marginTop="170dp"/>
+
+        <TextView
+            android:id="@+id/details_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="20dp"
+            android:layout_marginTop="210dp"/>
+
+        <TextView
+            android:id="@+id/details_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="20dp"
+            android:layout_marginTop="250dp"/>
+
+        <TextView
+            android:id="@+id/details_fee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="290dp"
+            android:text="TextView"
+            android:textSize="20dp" />
+
+    </androidx.cardview.widget.CardView>
+
+
+
+    <Button
+        android:id="@+id/participate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Participate"
+        android:textSize="20dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="10dp"/>
+</LinearLayout>

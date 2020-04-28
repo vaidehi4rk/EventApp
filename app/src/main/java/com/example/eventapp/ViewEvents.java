@@ -2,10 +2,15 @@ package com.example.eventapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.CalendarContract;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -18,10 +23,13 @@ public class ViewEvents extends AppCompatActivity {
     ListView listView;
     eventlist event;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_events);
+
+
 
 
         db = new DatabaseHelper(this);
@@ -45,6 +53,21 @@ public class ViewEvents extends AppCompatActivity {
         eventList_Adapter adapter = new eventList_Adapter(this,R.layout.viewevents_list_adapter,eventlists);
         listView = (ListView)findViewById(R.id.events_list);
         listView.setAdapter(adapter);
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final int pos=position;
+                TextView name=(TextView) view.findViewById(R.id.ename);
+                String n=name.getText().toString();
+                // Toast.makeText(getApplicationContext(), "position is: "+position+"eventname: "+n, Toast.LENGTH_SHORT).show();
+                Intent i= new Intent(getApplicationContext(),Update.class);
+                i.putExtra("Ename",n);
+                startActivity(i);
+            }
+        });
+
 
     }
 }

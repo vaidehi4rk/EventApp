@@ -5,7 +5,7 @@
     android:id="@+id/contentPanel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backa"
+    android:background="@drawable/d"
     android:orientation="vertical"
     tools:context=".myProfile">
 
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:ems="10"
         android:inputType="textPersonName" />
 
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:ems="10"
         android:inputType="textPersonName" />
 
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:ems="10"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:inputType="textPersonName" />
 
     <EditText
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:ems="10"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:inputType="textPersonName" />
 
     <EditText
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:ems="10"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:inputType="textPersonName" />
 
     <Button
@@ -63,7 +63,7 @@
         android:layout_marginTop="60dp"
         android:background="@drawable/btn"
         android:text="Edit"
-        android:textColor="#3f9fff"
+        android:textColor="#000000"
         android:textSize="18dp"
         app:fontFamily="@font/armata">
 
@@ -76,7 +76,7 @@
         android:id="@+id/Goback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#FFF"
+        android:textColor="#000000"
         android:text="Go back to home page"
         android:layout_marginLeft="130dp"
         android:layout_marginTop="50dp">

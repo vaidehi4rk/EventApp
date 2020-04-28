@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddEvent"
-    android:background="@drawable/bpg">
+    android:background="@drawable/c">
 
 
     <EditText
@@ -27,8 +27,8 @@
         android:hint="Event Name"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textColor="#0274be"
-        android:textColorHint="#3f9fff"
+        android:textColor="#000080"
+        android:textColorHint="#000080"
         app:fontFamily="@font/armata" />
 
     <EditText
@@ -47,8 +47,8 @@
         android:hint="Event Description"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textColor="#0274be"
-        android:textColorHint="#3f9fff"
+        android:textColor="#000080"
+        android:textColorHint="#000080"
         app:fontFamily="@font/armata" />
 
     <EditText
@@ -69,8 +69,8 @@
         android:hint="POC name"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textColor="#0274be"
-        android:textColorHint="#3f9fff"
+        android:textColor="#000080"
+        android:textColorHint="#000080"
         app:fontFamily="@font/armata" />
 
     <EditText
@@ -91,8 +91,8 @@
         android:hint="POC Mobile Number"
         android:inputType="number"
         android:textAlignment="center"
-        android:textColor="#0274be"
-        android:textColorHint="#3f9fff"
+        android:textColor="#000080"
+        android:textColorHint="#000080"
         app:fontFamily="@font/armata" />
 
     <EditText
@@ -113,8 +113,8 @@
         android:hint="POC Email ID"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textColor="#0274be"
-        android:textColorHint="#3f9fff"
+        android:textColor="#000080"
+        android:textColorHint="#000080"
         app:fontFamily="@font/armata" />
 
     <EditText
@@ -135,8 +135,8 @@
         android:hint="*yyyy/mm/dd* format"
         android:inputType="date"
         android:textAlignment="center"
-        android:textColor="#0274be"
-        android:textColorHint="#3f9fff"
+        android:textColor="#000080"
+        android:textColorHint="#000080"
         app:fontFamily="@font/armata" />
 
 
@@ -156,8 +156,8 @@
         android:hint="Timing *21:00* format"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textColor="#0274be"
-        android:textColorHint="#3f9fff"
+        android:textColor="#000080"
+        android:textColorHint="#000080"
         app:fontFamily="@font/armata" />
 
     <Button
@@ -174,8 +174,8 @@
         android:layout_marginBottom="32dp"
         android:background="@drawable/btn"
         android:text="\Add Event"
-        android:textColor="#0274be"
-        android:textColorHint="#3f9fff"
+        android:textColor="#000080"
+        android:textColorHint="#000080"
         app:fontFamily="@font/armata" />
 
     <EditText
@@ -200,8 +200,8 @@
         android:hint="Location"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textColor="#0274be"
-        android:textColorHint="#3f9fff"
+        android:textColor="#000080"
+        android:textColorHint="#000080"
         app:fontFamily="@font/armata" />
 
     <EditText
@@ -226,8 +226,8 @@
         android:hint="Entry fees"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textColor="#0274be"
-        android:textColorHint="#3f9fff"
+        android:textColor="#000080"
+        android:textColorHint="#000080"
         app:fontFamily="@font/armata" />
 
 

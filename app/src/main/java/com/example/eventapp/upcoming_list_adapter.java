@@ -27,15 +27,6 @@ public class upcoming_list_adapter extends ArrayAdapter<Upcoming> {
         mViewResourceid=texViewResourceID;
     }
 
-
-    /*public homepage_listadapter(Context context, int textViewResourceId, ArrayList<Ongoing> oEvents) {
-       super(context,textViewResourceId,oEvents);
-        this.oEvents = oEvents;
-        layoutInflater=(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mViewResourceid=textViewResourceId;
-
-
-    }*/
     public View getView(int position , View ConverView, ViewGroup parents) {
         ConverView = layoutInflater.inflate(mViewResourceid, null);
         Upcoming og=uEvents.get(position);
@@ -48,7 +39,7 @@ public class upcoming_list_adapter extends ArrayAdapter<Upcoming> {
 
             if(eventname  != null)
             {
-                eventname.setText("Event Name:  "+ (og.getEname()));
+                eventname.setText(og.getEname());
             }
 
             if(date  != null)

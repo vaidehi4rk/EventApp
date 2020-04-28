@@ -22,13 +22,14 @@
             android:orientation="vertical">
 
 
+
             <TextView
                 android:id="@+id/nameE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:text="Event Name"
+                android:text="Event Name :"
                 android:textAlignment="center"
                 android:textColor="#000"
                 android:textSize="18sp"

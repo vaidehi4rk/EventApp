@@ -1,19 +1,25 @@
 package com.example.eventapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
 
 public class eventList_Adapter extends ArrayAdapter<eventlist> {
 
     private LayoutInflater layoutInflater;
     private ArrayList<eventlist> events;
     private int mViewResourceid;
+
+
+
 
     public eventList_Adapter(Context context, int textViewResourceId, ArrayList<eventlist> events)
     {
@@ -26,6 +32,7 @@ public class eventList_Adapter extends ArrayAdapter<eventlist> {
     public View getView(int position , View ConverView, ViewGroup parents){
         ConverView=layoutInflater.inflate(mViewResourceid,null);
         eventlist e=events.get(position);
+
 
         if(e != null)
         {
@@ -42,7 +49,7 @@ public class eventList_Adapter extends ArrayAdapter<eventlist> {
 
             if(eventname  != null)
             {
-                eventname.setText("Event Name:  "+ (e.geteName()));
+                eventname.setText(e.geteName());
             }
             if(edesc!=null)
             {
@@ -80,4 +87,6 @@ public class eventList_Adapter extends ArrayAdapter<eventlist> {
         }
         return ConverView;
     }
+
+
 }
