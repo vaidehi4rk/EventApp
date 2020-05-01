@@ -151,10 +151,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             return true;
     }
-    /*public  boolean deleteEvent()
+
+    public Cursor getParticipants()
+    {
+        db=this.getWritableDatabase();
+        Cursor res1=db.rawQuery("select p.pid,r.name,e.eventname,r.email,r.college,r.mobile from particpants p,register r,eventDetails e where p.rid=r.rid and p.eid=e.eid",null);
+        return res1;
+    }
+   /* public  boolean deleteEvent()
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE FROM eventDetails WHERE eventname='gk quiz'");
+        db.execSQL("DELETE FROM particpants WHERE pid=1 or pid=2 or pid=3");
         return true;
 
     }*/

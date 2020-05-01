@@ -29,7 +29,7 @@ import java.util.List;
 
 public class HomePage extends AppCompatActivity {
     User user;
-    int id=0;
+    int userid=0;
     String name;
     Cursor data;
     Button ongoing,upgoing;
@@ -58,16 +58,19 @@ public class HomePage extends AppCompatActivity {
         listView2 = (ListView)findViewById(R.id.listview2);
 
         db = new DatabaseHelper(this);
+
+
+
         oEvents= new ArrayList<>();
         uEvents=new ArrayList<>();
 
 
         //session
         user=new User(HomePage.this);
-        id=getIntent().getExtras().getInt("id");
+        userid=getIntent().getExtras().getInt("id");
         //  name=getIntent().getExtras().getString("name");
 
-
+        Toast.makeText(this, "id is"+userid, Toast.LENGTH_SHORT).show();
 
         //upcoming events
         upgoing.setOnClickListener(new View.OnClickListener()
@@ -151,9 +154,10 @@ public class HomePage extends AppCompatActivity {
                 final int p=position;
                 TextView nm=(TextView) view.findViewById(R.id.nameE);
                 String namee=nm.getText().toString();
-                Toast.makeText(getApplicationContext(), "position is: "+position+"eventname: "+namee, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "position is: "+position+"eventname: "+namee, Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomePage.this, "listview1 id is"+userid, Toast.LENGTH_SHORT).show();
                 Intent i= new Intent(getApplicationContext(),EventMoreDetails.class);
-                i.putExtra("id",id);
+                i.putExtra("id",userid);
                 i.putExtra("eventname",namee);
                 startActivity(i);
             }
@@ -165,9 +169,10 @@ public class HomePage extends AppCompatActivity {
                 final int p=position;
                 TextView nm=(TextView) view.findViewById(R.id.nameE);
                 String namee=nm.getText().toString();
-                Toast.makeText(getApplicationContext(), "position is: "+position+"eventname: "+namee, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "position is: "+position+"eventname: "+namee, Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomePage.this, "listview2 id is"+userid, Toast.LENGTH_SHORT).show();
                 Intent i= new Intent(getApplicationContext(),EventMoreDetails.class);
-                i.putExtra("id",id);
+                i.putExtra("id",userid);
                 i.putExtra("eventname",namee);
                 startActivity(i);
             }
@@ -190,7 +195,7 @@ public class HomePage extends AppCompatActivity {
         if(item.getItemId()==R.id.myProfile)
         {
             Intent i = new Intent(this,myProfile.class);
-            i.putExtra("id",id);
+            i.putExtra("id",userid);
             i.putExtra("name",name);
             startActivity(i);
         }

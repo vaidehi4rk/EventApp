@@ -13,7 +13,8 @@ public class EventMoreDetails extends AppCompatActivity {
 
     DatabaseHelper db;
     User user;
-    Integer id,eventid;
+    int id=0;
+    Integer eventid;
     String ename,evname;
     TextView details_name,details_desc,details_poc,details_poc_mob,details_date,details_location,details_time,details_fee;
     Button participate;
