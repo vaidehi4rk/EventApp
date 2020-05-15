@@ -50,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    //checking the login credentials
+   /* //checking the login credentials
     public Boolean logincheck(String uname,String pwd)
     {
         SQLiteDatabase db=this.getReadableDatabase();
@@ -64,7 +64,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         {
             return  false;
         }
-    }
+    }*/
 
     //inserting event details
     public boolean insertEvent(String eventName,String desc,String poc, String pocmob,String pocemail,String date,String time, String location, String fee) {
@@ -91,6 +91,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //getting  only id ,name , password
+    //login check
     public Cursor getRecords() {
         db=this.getWritableDatabase();
         Cursor res=db.rawQuery("select rid,name,password from register",null);
