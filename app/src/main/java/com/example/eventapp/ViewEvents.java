@@ -70,4 +70,11 @@ public class ViewEvents extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), AdminHome.class));
+        finish();
+    }
 }

@@ -1,7 +1,10 @@
 package com.example.eventapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +21,13 @@ public class Update extends AppCompatActivity {
     Button eUpdate,eDelete;
     Cursor record;
     Integer eventid;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), ViewEvents.class));
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +83,49 @@ public class Update extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(), "Something Went wrong! please try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Something Went Wrong! Please Try Again.", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+
+        eDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Update.this);
+                builder.setMessage("Are you sure you want to delete this event details?");
+                builder.setTitle("Delete Event Details");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        //delete event details
+                         boolean res=db.deleteEvent(eventid);
+                         if(res==true)
+                           {
+                               Toast.makeText(Update.this, "Event Details Deleted Successfully! ", Toast.LENGTH_LONG).show();
+                           }
+                        Intent intent=new Intent(getApplicationContext(),ViewEvents.class);
+                        startActivity(intent);
+                    }
+
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
             }
         });
     }

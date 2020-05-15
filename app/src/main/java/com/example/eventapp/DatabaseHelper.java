@@ -31,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    //inserting participants details
+    //inserting user details
     public  boolean insertData(String name, String email, String college, String mobile, String password)
     {
      SQLiteDatabase db= this.getWritableDatabase();
@@ -123,6 +123,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    //delete event details
+    public  boolean deleteEvent(Integer eid)
+    {
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL("DELETE FROM eventDetails WHERE eid="+eid);
+        return true;
+
+    }
+
 
     //update user profile details
     public boolean updateUser(Integer rid,String name, String email, String college, String mobile ,String password)
@@ -142,6 +151,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+
+    //insert the details of only participated users
     public boolean insertParticipate(Integer rid,Integer eid)
     {
         db=this.getWritableDatabase();
@@ -155,17 +166,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
+
+    //get particpants details , event name in whihc the user has participated, and participation id
     public Cursor getParticipants()
     {
         db=this.getWritableDatabase();
         Cursor res1=db.rawQuery("select p.pid,r.name,e.eventname,r.email,r.college,r.mobile from particpants p,register r,eventDetails e where p.rid=r.rid and p.eid=e.eid",null);
         return res1;
     }
-   /* public  boolean deleteEvent()
-    {
-        SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("DELETE FROM particpants WHERE pid=1 or pid=2 or pid=3");
-        return true;
 
-    }*/
+
+
 }
