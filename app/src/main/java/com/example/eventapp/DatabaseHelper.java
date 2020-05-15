@@ -22,6 +22,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("create table register (rid integer primary key autoincrement, name text,email text, college text, mobile integer, password text)");
             db.execSQL("create table eventDetails (eid integer primary key autoincrement, eventname text,dept text, pocname text, pocmobile text, pocemail text, date date, time text,location text, entryfee text)");
             db.execSQL("create table particpants (pid integer primary key autoincrement,rid integer,eid integer)");
+
+
     }
 
     @Override
