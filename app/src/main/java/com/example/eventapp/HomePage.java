@@ -25,6 +25,7 @@ import org.w3c.dom.Text;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class HomePage extends AppCompatActivity {
@@ -39,7 +40,8 @@ public class HomePage extends AppCompatActivity {
     ListView listView1,listView2;
     Ongoing o;
     Upcoming u;
-    String date,name1;
+    String name1;
+    String date;
     StringBuffer c1;
     LinearLayout layout;
     homepage_listadapter adpt;
@@ -90,16 +92,36 @@ public class HomePage extends AppCompatActivity {
                     Calendar c = Calendar.getInstance();
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     String getCurrentDateTime = sdf.format(c.getTime());
+                    String[] d1=getCurrentDateTime.split("/");
+                    int[] x1= new int[d1.length];
                     data = db.getEventRecords();
                     Integer compare;
                     c1 = new StringBuffer();
                     while (data.moveToNext()) {
                         name1 = data.getString(1);
                         date = data.getString(6);
-                        compare = getCurrentDateTime.compareTo(date);
-                        if (compare < 0) {
-                            u = new Upcoming(name1, date);
+                        String[] d2=date.split("/");
+                        u = new Upcoming(name1, date);
+                       if (d1[2].compareTo(d2[2])==0 && d1[1].compareTo(d2[1])<0)
+                        {
+                           uEvents.add(u);
+                           c1.append(date + " " + getCurrentDateTime.compareTo(date) + "\n");
+                           //Toast.makeText(HomePage.this, "value   " + c1, Toast.LENGTH_LONG).show();
+                        }
+                       if(d1[1].compareTo(d2[1])==0)
+                       {
+                           if(d1[0].compareTo(d2[0])<0){
+                               uEvents.add(u);
+                               c1.append(date + " " + getCurrentDateTime.compareTo(date) + "\n");
+                               //Toast.makeText(HomePage.this, "value   " + c1, Toast.LENGTH_LONG).show();
+                           }
+
+                       }
+                        if(d1[2].compareTo(d2[2])<0)
+                        {
                             uEvents.add(u);
+                            c1.append(date + " " + getCurrentDateTime.compareTo(date) + "\n");
+                            //Toast.makeText(HomePage.this, "value   " + c1, Toast.LENGTH_LONG).show();
                         }
                     }
                     adp = new upcoming_list_adapter(HomePage.this, R.layout.upcoming_list_adapter, uEvents);
@@ -121,21 +143,31 @@ public class HomePage extends AppCompatActivity {
 
                 if(listView1.getCount() == 0) {
 
-                    Calendar c = Calendar.getInstance();
+                    Date c = Calendar.getInstance().getTime();
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    String getCurrentDateTime = sdf.format(c.getTime());
+                    String getCurrentDateTime=sdf.format(c);
+                    String[] d1=getCurrentDateTime.split("/");
+                    Toast.makeText(HomePage.this, "date is: "+getCurrentDateTime, Toast.LENGTH_LONG).show();
                     data = db.getEventRecords();
                     Integer compare;
                     c1 = new StringBuffer();
                     while (data.moveToNext()) {
                         name1 = data.getString(1);
                         date = data.getString(6);
-                        compare = getCurrentDateTime.compareTo(date);
-                        if (compare > 0 || compare == 0) {
-                            o = new Ongoing(name1, date);
-                            oEvents.add(o);
-                            c1.append(name1 + " " + date + "\n");
-                            Toast.makeText(HomePage.this, "value   " + c1, Toast.LENGTH_SHORT).show();
+                        String[] d2=date.split("/");
+                        o = new Ongoing(name1, date);
+                        if (d1[2].compareTo(d2[2])==0 && d1[1].compareTo(d2[1])==0 ) {
+                            if(d1[0].compareTo(d2[0])>=0) {
+                                oEvents.add(o);
+                                c1.append(date + " " + getCurrentDateTime.compareTo(date) + "\n");
+                                Toast.makeText(HomePage.this, "value   " + c1, Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+                        if(d1[2].compareTo(d2[2])==0 && d1[1].compareTo(d2[1])>0){
+                                oEvents.add(o);
+                                c1.append(date + " " + getCurrentDateTime.compareTo(date) + "\n");
+                                Toast.makeText(HomePage.this, "value   " + c1, Toast.LENGTH_LONG).show();
 
                         }
                         adpt = new homepage_listadapter(HomePage.this, R.layout.homepage_list_adapter, oEvents);
@@ -153,6 +185,7 @@ public class HomePage extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final int p=position;
                 TextView nm=(TextView) view.findViewById(R.id.nameE);
+                //TextView dt=(TextView) view.findViewById(R.id.nameE);
                 String namee=nm.getText().toString();
                 //Toast.makeText(getApplicationContext(), "position is: "+position+"eventname: "+namee, Toast.LENGTH_SHORT).show();
                 Toast.makeText(HomePage.this, "listview1 id is"+userid, Toast.LENGTH_SHORT).show();

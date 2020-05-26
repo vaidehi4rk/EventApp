@@ -108,6 +108,10 @@ public class Update extends AppCompatActivity {
                            {
                                Toast.makeText(Update.this, "Event Details Deleted Successfully! ", Toast.LENGTH_LONG).show();
                            }
+                         else
+                         {
+                             Toast.makeText(Update.this, "Event Details Not Deleted. Please Try Again! ", Toast.LENGTH_LONG).show();
+                         }
                         Intent intent=new Intent(getApplicationContext(),ViewEvents.class);
                         startActivity(intent);
                     }

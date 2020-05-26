@@ -11,8 +11,9 @@ import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     SQLiteDatabase db;
+
     public DatabaseHelper(@Nullable Context context) {
-        super(context, "EventApplication.db", null, 1);
+        super(context, "MyEventApp17.db", null, 1);
         db= this.getWritableDatabase();
 
     }
@@ -21,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
             db.execSQL("create table register (rid integer primary key autoincrement, name text,email text, college text, mobile integer, password text)");
             db.execSQL("create table eventDetails (eid integer primary key autoincrement, eventname text,dept text, pocname text, pocmobile text, pocemail text, date date, time text,location text, entryfee text)");
-            db.execSQL("create table particpants (pid integer primary key autoincrement,rid integer,eid integer)");
+            db.execSQL("create table particpants (pid integer primary key autoincrement,rid integer,eid integer,status text DEFAULT 'PARTICPATED')");
 
 
     }
