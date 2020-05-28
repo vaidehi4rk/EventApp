@@ -36,9 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_marginLeft="120dp"
-            android:textStyle="bold"
             android:layout_marginTop="10dp"/>
 
         <TextView
@@ -54,8 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_marginTop="50dp"
             android:layout_marginLeft="118dp"
             android:inputType="textMultiLine"/>
@@ -73,8 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textSize="20dp"
-            android:textStyle="bold"
+            android:textSize="18dp"
             android:layout_marginTop="90dp"
             android:layout_marginLeft="110dp"/>
 
@@ -93,8 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="130dp"
             android:text="TextView"
-            android:textSize="20dp"
-            android:textStyle="bold"
+            android:textSize="18dp"
             android:layout_marginLeft="120dp"/>
 
 
@@ -110,8 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textSize="20dp"
-            android:textStyle="bold"
+            android:textSize="18dp"
             android:layout_marginTop="170dp"
             android:layout_marginLeft="110dp"/>
 
@@ -128,8 +123,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textSize="20dp"
-            android:textStyle="bold"
+            android:textSize="18dp"
             android:layout_marginTop="210dp"
             android:layout_marginLeft="138dp"/>
 
@@ -146,8 +140,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textSize="20dp"
-            android:textStyle="bold"
+            android:textSize="18dp"
             android:layout_marginTop="250dp"
             android:layout_marginLeft="70dp"/>
 
@@ -165,8 +158,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="290dp"
             android:text="TextView"
-            android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_marginLeft="90dp"/>
 
     </androidx.cardview.widget.CardView>

@@ -154,7 +154,7 @@ public class myProfile extends AppCompatActivity {
         Goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),HomePage.class);
+                Intent i = new Intent(getApplicationContext(),FinalParticipation.class);
                 i.putExtra("id",id);
                 i.putExtra("name",name);
                 startActivity(i);

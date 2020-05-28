@@ -1,5 +1,6 @@
 package com.example.eventapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.database.Cursor;
@@ -9,11 +10,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class EventMoreDetails extends AppCompatActivity {
 
     DatabaseHelper db;
     User user;
     int id=0;
+    int eid;
     Integer eventid;
     String ename,evname;
     TextView details_name,details_desc,details_poc,details_poc_mob,details_date,details_location,details_time,details_fee;
@@ -66,14 +71,45 @@ public class EventMoreDetails extends AppCompatActivity {
         participate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean res=db.insertParticipate(id,eventid);
-                if(res==true)
+                int flag=0;
+                Cursor rec1=db.showParticipants();
+                while(rec1.moveToNext())
                 {
-                    Toast.makeText(getApplicationContext(), "Participated", Toast.LENGTH_SHORT).show();
+                    int studid= rec1.getInt(1);
+                    int eveid= rec1.getInt(2);
+                    if(studid==id && eveid==eventid)
+                    {
+                        flag=1;
+                    }
+                }
+                if(flag==0) {
+                    boolean res = db.insertParticipate(id, eventid);
+                    if (res == true) {
+
+                        Toast.makeText(getApplicationContext(), "Participated", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Not Participated", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(), "Not Participated", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Already Participated", Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                    builder.setTitle("Already Participated");
+                    builder.setMessage("You have already participated in this event!");
+                    builder.setCancelable(true);
+
+                    final AlertDialog dlg = builder.create();
+
+                    dlg.show();
+
+                    final Timer t = new Timer();
+                    t.schedule(new TimerTask() {
+                        public void run() {
+                            dlg.dismiss(); // when the task active then close the dialog
+                            t.cancel(); // also just top the timer thread, otherwise, you may receive a crash report
+                        }
+                    }, 2000);
                 }
             }
         });

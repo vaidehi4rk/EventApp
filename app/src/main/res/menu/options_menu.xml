@@ -3,16 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+    <item
+        android:id="@+id/history1"
+        android:icon="@drawable/ic_history"
+        app:showAsAction="ifRoom"
+        android:title="History">
+
+    </item>
 
 
+    <item
+        android:id="@+id/myProfile"
+        android:title="My Profile"
+        android:icon="@drawable/profile"
+        app:showAsAction="ifRoom">
 
-<item
-    android:id="@+id/myProfile"
-    android:title="My Profile"
-    android:icon="@drawable/profile"
-    app:showAsAction="ifRoom">
-
-</item>
+    </item>
 
     <item
         android:id="@+id/logout"

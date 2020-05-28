@@ -165,11 +165,13 @@ public class HomePage extends AppCompatActivity {
 
                         }
                         if(d1[2].compareTo(d2[2])==0 && d1[1].compareTo(d2[1])>0){
-                                oEvents.add(o);
+
                                 c1.append(date + " " + getCurrentDateTime.compareTo(date) + "\n");
                                 Toast.makeText(HomePage.this, "value   " + c1, Toast.LENGTH_LONG).show();
 
                         }
+
+
                         adpt = new homepage_listadapter(HomePage.this, R.layout.homepage_list_adapter, oEvents);
                         listView1.setAdapter(adpt);
                     }
@@ -189,10 +191,31 @@ public class HomePage extends AppCompatActivity {
                 String namee=nm.getText().toString();
                 //Toast.makeText(getApplicationContext(), "position is: "+position+"eventname: "+namee, Toast.LENGTH_SHORT).show();
                 Toast.makeText(HomePage.this, "listview1 id is"+userid, Toast.LENGTH_SHORT).show();
-                Intent i= new Intent(getApplicationContext(),EventMoreDetails.class);
-                i.putExtra("id",userid);
-                i.putExtra("eventname",namee);
-                startActivity(i);
+
+                int flag=0;
+                Date c = Calendar.getInstance().getTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String getCurrentDateTime=sdf.format(c);
+                String[] d1=getCurrentDateTime.split("/");
+                data = db.getEventRecords();
+                while (data.moveToNext()) {
+                    name1 = data.getString(1);
+                    date = data.getString(6);
+                    String[] d2 = date.split("/");
+                    if (d1[2].compareTo(d2[2]) >= 0 && d1[1].compareTo(d2[1]) >= 0 && d1[0].compareTo(d2[0]) >= 0) {
+                        flag=1;
+                    }
+                }
+                if (flag==0) {
+                    Intent i = new Intent(getApplicationContext(), EventMoreDetails.class);
+                    i.putExtra("id", userid);
+                    i.putExtra("eventname", namee);
+                    startActivity(i);
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"Cannot apply",Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -238,6 +261,13 @@ public class HomePage extends AppCompatActivity {
             showRegistersDialog1();
         }
 
+        if(item.getItemId()==R.id.history1)
+        {
+            Intent i = new Intent(this,FinalParticipation.class);
+            i.putExtra("id",userid);
+            i.putExtra("name",name);
+            startActivity(i);
+        }
 
         return super.onOptionsItemSelected(item);
     }

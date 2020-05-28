@@ -168,7 +168,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    //get particpants details , event name in whihc the user has participated, and participation id
+    //get particpants details , event name in which the user has participated, and participation id
     public Cursor getParticipants()
     {
         db=this.getWritableDatabase();
@@ -176,6 +176,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res1;
     }
 
+    public Cursor showParticipants()
+    {
+        db=this.getWritableDatabase();
+        Cursor rec=db.rawQuery("select * from particpants",null);
+        return rec;
+    }
+
+    public Cursor showHistory(int rid)
+    {
+        db=this.getWritableDatabase();
+        Cursor rec=db.rawQuery("select p.rid,e.eventname,e.date from particpants p join eventDetails e on e.eid=p.eid where p.rid="+rid,null);
+        return rec;
+    }
+
+    /*public boolean deletep()
+    {
+        db=this.getWritableDatabase();
+        db.execSQL("DELETE from particpants where rid=1");
+        return true;
+    }*/
 
 
 }
