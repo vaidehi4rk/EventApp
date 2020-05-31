@@ -13,7 +13,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     SQLiteDatabase db;
 
     public DatabaseHelper(@Nullable Context context) {
-        super(context, "MyEventApp17.db", null, 1);
+        super(context, "Demodatabase.db", null, 1);
         db= this.getWritableDatabase();
 
     }
@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
             db.execSQL("create table register (rid integer primary key autoincrement, name text,email text, college text, mobile integer, password text)");
-            db.execSQL("create table eventDetails (eid integer primary key autoincrement, eventname text,dept text, pocname text, pocmobile text, pocemail text, date date, time text,location text, entryfee text)");
+            db.execSQL("create table eventDetails (eid integer primary key autoincrement, eventname text,dept text, pocname text, pocmobile text, pocemail text, eventdate date, time text,location text, entryfee text)");
             db.execSQL("create table particpants (pid integer primary key autoincrement,rid integer,eid integer,status text DEFAULT 'PARTICPATED')");
 
 
@@ -78,7 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("pocname",poc);
         contentValues.put("pocmobile",pocmob);
         contentValues.put("pocemail",pocemail);
-        contentValues.put("date",date);
+        contentValues.put("eventdate",date);
         contentValues.put("time",time);
         contentValues.put("location",location);
         contentValues.put("entryfee",fee);
@@ -112,15 +112,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //get all event details
     public Cursor getEventRecords() {
         db=this.getWritableDatabase();
-        Cursor res=db.rawQuery("select * from eventDetails",null);
+        Cursor res=db.rawQuery("select * from eventDetails ",null);
         return res;
     }
 
     //Update Event details
-    public  boolean updateEvents(Integer eid,String eventname,String dept,String pocname,String pocmobile,String pocemail,String date,String time,String location,String entryfee )
+    public  boolean updateEvents(Integer eid,String eventname,String dept,String pocname,String pocmobile,String pocemail,String eventdate,String time,String location,String entryfee )
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        db.execSQL("UPDATE eventDetails SET eventname='"+eventname+"',dept='"+dept+"',pocname='"+pocname+"',pocmobile='"+pocmobile+"',pocemail='"+pocemail+"',date='"+date+"',time='"+time+"',location='"+location+"',entryfee='"+entryfee+"' WHERE eid="+eid);
+        db.execSQL("UPDATE eventDetails SET eventname='"+eventname+"',dept='"+dept+"',pocname='"+pocname+"',pocmobile='"+pocmobile+"',pocemail='"+pocemail+"',eventdate='"+eventdate+"',time='"+time+"',location='"+location+"',entryfee='"+entryfee+"' WHERE eid="+eid);
         return true;
     }
 
@@ -172,7 +172,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getParticipants()
     {
         db=this.getWritableDatabase();
-        Cursor res1=db.rawQuery("select p.pid,r.name,e.eventname,r.email,r.college,r.mobile from particpants p,register r,eventDetails e where p.rid=r.rid and p.eid=e.eid",null);
+        Cursor res1=db.rawQuery("select p.pid,r.name,e.eventname,r.email,r.college,r.mobile,e.eventdate from particpants p,register r,eventDetails e where p.rid=r.rid and p.eid=e.eid",null);
         return res1;
     }
 
@@ -186,16 +186,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor showHistory(int rid)
     {
         db=this.getWritableDatabase();
-        Cursor rec=db.rawQuery("select p.rid,e.eventname,e.date from particpants p join eventDetails e on e.eid=p.eid where p.rid="+rid,null);
+        Cursor rec=db.rawQuery("select p.rid,e.eventname,e.eventdate from particpants p join eventDetails e on e.eid=p.eid where p.rid="+rid,null);
         return rec;
     }
 
-    /*public boolean deletep()
-    {
-        db=this.getWritableDatabase();
-        db.execSQL("DELETE from particpants where rid=1");
-        return true;
-    }*/
+//    public boolean deletep()
+//    {
+//        db=this.getWritableDatabase();
+//        db.execSQL("DELETE from particpants where rid=1");
+//        return true;
+//    }
 
 
 }

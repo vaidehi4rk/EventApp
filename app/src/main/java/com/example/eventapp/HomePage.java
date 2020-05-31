@@ -41,7 +41,7 @@ public class HomePage extends AppCompatActivity {
     Ongoing o;
     Upcoming u;
     String name1;
-    String date;
+    int flag=0;    String date;
     StringBuffer c1;
     LinearLayout layout;
     homepage_listadapter adpt;
@@ -93,7 +93,6 @@ public class HomePage extends AppCompatActivity {
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     String getCurrentDateTime = sdf.format(c.getTime());
                     String[] d1=getCurrentDateTime.split("/");
-                    int[] x1= new int[d1.length];
                     data = db.getEventRecords();
                     Integer compare;
                     c1 = new StringBuffer();
@@ -164,13 +163,13 @@ public class HomePage extends AppCompatActivity {
                             }
 
                         }
-                        if(d1[2].compareTo(d2[2])==0 && d1[1].compareTo(d2[1])>0){
-
+                        if(d1[2].compareTo(d2[2])==0 && d1[1].compareTo(d2[1])>0)
+                        {
+                            oEvents.add(o);
                                 c1.append(date + " " + getCurrentDateTime.compareTo(date) + "\n");
                                 Toast.makeText(HomePage.this, "value   " + c1, Toast.LENGTH_LONG).show();
 
                         }
-
 
                         adpt = new homepage_listadapter(HomePage.this, R.layout.homepage_list_adapter, oEvents);
                         listView1.setAdapter(adpt);
@@ -187,34 +186,74 @@ public class HomePage extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final int p=position;
                 TextView nm=(TextView) view.findViewById(R.id.nameE);
-                //TextView dt=(TextView) view.findViewById(R.id.nameE);
+                TextView dt=(TextView) view.findViewById(R.id.dateE);
                 String namee=nm.getText().toString();
-                //Toast.makeText(getApplicationContext(), "position is: "+position+"eventname: "+namee, Toast.LENGTH_SHORT).show();
-                Toast.makeText(HomePage.this, "listview1 id is"+userid, Toast.LENGTH_SHORT).show();
-
-                int flag=0;
                 Date c = Calendar.getInstance().getTime();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 String getCurrentDateTime=sdf.format(c);
                 String[] d1=getCurrentDateTime.split("/");
-                data = db.getEventRecords();
+                String[] td2=dt.getText().toString().split("/");
+
+                /*data = db.getEventRecords();
                 while (data.moveToNext()) {
                     name1 = data.getString(1);
                     date = data.getString(6);
                     String[] d2 = date.split("/");
-                    if (d1[2].compareTo(d2[2]) >= 0 && d1[1].compareTo(d2[1]) >= 0 && d1[0].compareTo(d2[0]) >= 0) {
+                    if (d1[2].compareTo(d2[2]) == 0 && d1[1].compareTo(d2[1]) == 0 && d1[0].compareTo(d2[0])==0) {
                         flag=1;
                     }
-                }
-                if (flag==0) {
+                }*/
+                if (d1[2].equals(td2[2]) && d1[1].equals(td2[1]) && d1[0].equals(td2[0])) {
                     Intent i = new Intent(getApplicationContext(), EventMoreDetails.class);
                     i.putExtra("id", userid);
                     i.putExtra("eventname", namee);
                     startActivity(i);
                 }
+//                if (d1[2].compareTo(td2[2])>=0 && d1[1].compareTo(td2[1])>=0 && d1[0].compareTo(td2[0])>0)
                 else
                 {
-                    Toast.makeText(getApplicationContext(),"Cannot apply",Toast.LENGTH_LONG).show();
+//                    Intent i = new Intent(getApplicationContext(), EventMoreDetails.class);
+//                    i.putExtra("id", userid);
+//                    i.putExtra("eventname", namee);
+//                    //edited
+//                    String over="over";
+//                    i.putExtra("OVER",over);
+//                    startActivity(i);
+                        StringBuffer sb= new StringBuffer();
+                        Cursor res=db.getEventRecords();
+                        while(res.moveToNext())
+                        {
+                            String NameE=res.getString(1);
+                            if(namee.equals(NameE)){
+                                sb.append("\n Event Name:"+res.getString(1)+"\n\n");
+                                sb.append("Event Description: "+res.getString(2)+"\n\n");
+                                sb.append("POC Name: "+res.getString(3)+"\n\n");
+                                sb.append("POC Mobile: "+res.getString(4)+"\n\n");
+                                sb.append("POC Email: "+res.getString(5)+"\n\n");
+                                sb.append("Event Date: "+res.getString(6)+"\n\n");
+                                sb.append("Event Time: "+res.getString(7)+"\n\n");
+                                sb.append("Event Location: "+res.getString(8)+"\n\n");
+                                sb.append("Entry Fee: "+res.getString(9)+"\n\n");
+
+                            }
+
+                        }
+                   // Toast.makeText(getApplicationContext(), "Details\n"+sb.toString(), Toast.LENGTH_LONG).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(HomePage.this);
+                    builder.setTitle("This Event has already been held . You cannot participate in this event!");
+                    builder.setMessage(sb.toString()).setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int id)
+                        {
+                            //do things
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
+
+                   // Toast.makeText(getApplicationContext(),"This Event has already been held . You cannot participate in this event!",Toast.LENGTH_LONG).show();
+
                 }
             }
         });

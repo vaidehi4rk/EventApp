@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.eventapp">
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".history_adpater"></activity>
-        <activity android:name=".History_list_adapter" />
         <activity android:name=".ViewPartcipants_list_adapter" />
         <activity android:name=".Update" />
         <activity android:name=".EventMoreDetails" />
