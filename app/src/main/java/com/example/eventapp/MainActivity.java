@@ -3,6 +3,7 @@ package com.example.eventapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     View bgpprogress,bgpprogresstop;;
     Animation imgpage,ltr,btntwo,btnthree;
     User user;
+
 
     //private static int SPLASH_SCREEN_TIME_OUT=2000;
     @Override
@@ -52,11 +55,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
         //load animation
         imgpage= AnimationUtils.loadAnimation(this,R.anim.imgpage);
         ltr= AnimationUtils.loadAnimation(this,R.anim.ltr);
         btntwo= AnimationUtils.loadAnimation(this,R.anim.bttwo);
         btnthree= AnimationUtils.loadAnimation(this,R.anim.btnthree);
+
 
 
         //start animation

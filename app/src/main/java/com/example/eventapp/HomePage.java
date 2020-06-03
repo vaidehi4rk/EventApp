@@ -159,7 +159,7 @@ public class HomePage extends AppCompatActivity {
                             if(d1[0].compareTo(d2[0])>=0) {
                                 oEvents.add(o);
                                 c1.append(date + " " + getCurrentDateTime.compareTo(date) + "\n");
-                                Toast.makeText(HomePage.this, "value   " + c1, Toast.LENGTH_LONG).show();
+                                //Toast.makeText(HomePage.this, "value   " + c1, Toast.LENGTH_LONG).show();
                             }
 
                         }
@@ -167,7 +167,7 @@ public class HomePage extends AppCompatActivity {
                         {
                             oEvents.add(o);
                                 c1.append(date + " " + getCurrentDateTime.compareTo(date) + "\n");
-                                Toast.makeText(HomePage.this, "value   " + c1, Toast.LENGTH_LONG).show();
+                               // Toast.makeText(HomePage.this, "value   " + c1, Toast.LENGTH_LONG).show();
 
                         }
 
@@ -194,15 +194,6 @@ public class HomePage extends AppCompatActivity {
                 String[] d1=getCurrentDateTime.split("/");
                 String[] td2=dt.getText().toString().split("/");
 
-                /*data = db.getEventRecords();
-                while (data.moveToNext()) {
-                    name1 = data.getString(1);
-                    date = data.getString(6);
-                    String[] d2 = date.split("/");
-                    if (d1[2].compareTo(d2[2]) == 0 && d1[1].compareTo(d2[1]) == 0 && d1[0].compareTo(d2[0])==0) {
-                        flag=1;
-                    }
-                }*/
                 if (d1[2].equals(td2[2]) && d1[1].equals(td2[1]) && d1[0].equals(td2[0])) {
                     Intent i = new Intent(getApplicationContext(), EventMoreDetails.class);
                     i.putExtra("id", userid);
@@ -212,13 +203,6 @@ public class HomePage extends AppCompatActivity {
 //                if (d1[2].compareTo(td2[2])>=0 && d1[1].compareTo(td2[1])>=0 && d1[0].compareTo(td2[0])>0)
                 else
                 {
-//                    Intent i = new Intent(getApplicationContext(), EventMoreDetails.class);
-//                    i.putExtra("id", userid);
-//                    i.putExtra("eventname", namee);
-//                    //edited
-//                    String over="over";
-//                    i.putExtra("OVER",over);
-//                    startActivity(i);
                         StringBuffer sb= new StringBuffer();
                         Cursor res=db.getEventRecords();
                         while(res.moveToNext())
@@ -238,7 +222,7 @@ public class HomePage extends AppCompatActivity {
                             }
 
                         }
-                   // Toast.makeText(getApplicationContext(), "Details\n"+sb.toString(), Toast.LENGTH_LONG).show();
+
                     AlertDialog.Builder builder = new AlertDialog.Builder(HomePage.this);
                     builder.setTitle("This Event has already been held . You cannot participate in this event!");
                     builder.setMessage(sb.toString()).setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener()
@@ -264,7 +248,6 @@ public class HomePage extends AppCompatActivity {
                 final int p=position;
                 TextView nm=(TextView) view.findViewById(R.id.nameE);
                 String namee=nm.getText().toString();
-                //Toast.makeText(getApplicationContext(), "position is: "+position+"eventname: "+namee, Toast.LENGTH_SHORT).show();
                 Toast.makeText(HomePage.this, "listview2 id is"+userid, Toast.LENGTH_SHORT).show();
                 Intent i= new Intent(getApplicationContext(),EventMoreDetails.class);
                 i.putExtra("id",userid);

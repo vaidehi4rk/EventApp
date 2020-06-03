@@ -7,12 +7,13 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="390dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="12dp"
         app:cardCornerRadius="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
         app:cardBackgroundColor="#FFFFE0">
 
 
@@ -69,7 +70,8 @@
                 android:layout_height="wrap_content"
                 android:text="Click here for more details"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="190dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="145dp"
                 android:textSize="16sp"/>
 
         </LinearLayout>

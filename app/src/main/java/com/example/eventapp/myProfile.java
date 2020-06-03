@@ -27,10 +27,13 @@ public class myProfile extends AppCompatActivity {
     //public  static int id=0;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
+
+
 
         //bindings
         uName=(EditText)findViewById(R.id.uName);
@@ -163,4 +166,5 @@ public class myProfile extends AppCompatActivity {
 
 
     }
+   
 }

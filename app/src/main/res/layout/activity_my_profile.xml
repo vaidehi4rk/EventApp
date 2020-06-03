@@ -13,53 +13,79 @@
     <EditText
         android:id="@+id/uName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:background="@drawable/et_style"
         android:layout_marginTop="20dp"
         android:textColor="#000000"
         android:ems="10"
+        android:hint="Name"
+       android:padding="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/uEmail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:textColor="#000000"
         android:ems="10"
+        android:hint="Email ID"
+        android:padding="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/et_style"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/uCollege"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:ems="10"
+        android:hint="College Name"
         android:textColor="#000000"
-        android:inputType="textPersonName" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/et_style"
+        android:inputType="textPersonName"
+        android:padding="10dp"/>
 
     <EditText
         android:id="@+id/uMobile"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:ems="10"
+        android:hint="Mobile Number"
+        android:maxLength="10"
         android:textColor="#000000"
-        android:inputType="textPersonName" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/et_style"
+        android:inputType="phone"
+        android:padding="10dp"/>
 
     <EditText
         android:id="@+id/uPass"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:ems="10"
+        android:hint="Password"
         android:textColor="#000000"
-        android:inputType="textPersonName" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/et_style"
+        android:inputType="textPersonName"
+        android:padding="10dp"/>
 
     <Button
         android:id="@+id/updateBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="155dp"
+        android:layout_marginLeft="130dp"
         android:layout_marginTop="60dp"
         android:background="@drawable/btn"
         android:text="Edit"
@@ -79,7 +105,7 @@
         android:textColor="#000000"
         android:textSize="16dp"
         android:text="Click here to see your participation history"
-        android:layout_marginLeft="60dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="50dp">
 
     </TextView>

@@ -53,21 +53,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-   /* //checking the login credentials
-    public Boolean logincheck(String uname,String pwd)
-    {
-        SQLiteDatabase db=this.getReadableDatabase();
-        Cursor cursor=db.rawQuery("Select * from register where name=? and password=?",new String[]{uname,pwd});
-
-        if(cursor.getCount()>0)
-        {
-            return  true;
-        }
-        else
-        {
-            return  false;
-        }
-    }*/
 
     //inserting event details
     public boolean insertEvent(String eventName,String desc,String poc, String pocmob,String pocemail,String date,String time, String location, String fee) {
@@ -138,15 +123,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean updateUser(Integer rid,String name, String email, String college, String mobile ,String password)
     {
         SQLiteDatabase db=this.getWritableDatabase();
-        /*ContentValues contentValues= new ContentValues();
-        contentValues.put("name",name);
-        contentValues.put("email",email);
-        contentValues.put("college",college);
-        contentValues.put("mobile",mobile);
-        contentValues.put("password",password);
-        //res= db.execSQL("update  register set name='"+name+"', email='"+email+"', college='"+college+"', mobile='"+mobile+"',password='"+password+"'");
-        long res=db.update("register",contentValues,"id=?",null);*/
-
         db.execSQL("UPDATE register SET name = '"+name+"',email='"+email+"',college='"+college+"',mobile='"+mobile+"',password='"+password+"' WHERE rid = "+rid);
         return true;
 
@@ -190,12 +166,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rec;
     }
 
-//    public boolean deletep()
-//    {
-//        db=this.getWritableDatabase();
-//        db.execSQL("DELETE from particpants where rid=1");
-//        return true;
-//    }
 
 
 }

@@ -63,14 +63,14 @@
                 <ImageView
                     android:id="@+id/ViewEvents"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@drawable/viewevents6" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:text="View Events"
                     android:textAlignment="center"
@@ -105,10 +105,10 @@
 
                 <ImageView
                     android:id="@+id/addevents"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@drawable/addevenstd"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="100dp" />
 
                 <TextView
 
@@ -150,10 +150,10 @@
 
                 <ImageView
                     android:id="@+id/viewPart"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@drawable/viewparticpamts"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="100dp" />
 
                 <TextView
                     android:layout_width="wrap_content"

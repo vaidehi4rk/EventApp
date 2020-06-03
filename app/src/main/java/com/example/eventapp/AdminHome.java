@@ -49,6 +49,7 @@ public class AdminHome extends AppCompatActivity {
             }
         });
 
+        //viewParticpants
         viewPart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

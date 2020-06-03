@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,13 @@ public class Registration extends AppCompatActivity {
     Button signup;
     TextView signinText;
     DatabaseHelper db;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(),Login.class));
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,7 @@ public class Registration extends AppCompatActivity {
         signinText=(TextView)findViewById(R.id.signinText);
 
 
+
         signinText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,24 +50,54 @@ public class Registration extends AppCompatActivity {
             }
         });
 
+
+
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                boolean res=db.insertData(name.getText().toString(),email.getText().toString(),collegeName.getText().toString(),mobile.getText().toString(),pwd.getText().toString());
-                if(res== true)
-                {
-                    Toast.makeText(Registration.this, "Registration done successfully!!", Toast.LENGTH_LONG).show();
-                    Intent intent= new Intent(Registration.this,Login.class);
-                    startActivity(intent);
+                boolean checkFields = validate(new EditText[]{
+                        name,email,collegeName,mobile,pwd
+
+                });
+
+                if(checkFields==true){
+                    boolean res=db.insertData(name.getText().toString(),email.getText().toString(),collegeName.getText().toString(),mobile.getText().toString(),pwd.getText().toString());
+                    if(res== true)
+                    {
+                        Toast.makeText(Registration.this, "Registration done successfully!!", Toast.LENGTH_LONG).show();
+                        Intent intent= new Intent(Registration.this,Login.class);
+                        startActivity(intent);
+
+                    }
+                    else
+                    {
+                        Toast.makeText(Registration.this, "Registration not done!!", Toast.LENGTH_LONG).show();
+                    }
 
                 }
                 else
                 {
-                    Toast.makeText(Registration.this, "Registration not done!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Please fill all the details", Toast.LENGTH_LONG).show();
                 }
 
+
             }
+
+            private boolean validate(EditText[] fields ) {
+                for(int i=0; i<fields.length;i++){
+                    EditText currentField=fields[i];
+                    if(currentField.getText().toString().length()<=0){
+                        return false;
+                    }
+                }
+                return true;
+
+            }
+
         });
+
+
+
     }
 }

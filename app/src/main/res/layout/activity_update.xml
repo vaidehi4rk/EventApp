@@ -1,61 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/updatePanel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Update"
-    android:orientation="vertical">
+    android:background="@drawable/d"
+    android:orientation="vertical"
+    tools:context=".Update">
 
     <EditText
         android:id="@+id/eN"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Event Name" />
 
     <EditText
         android:id="@+id/eDes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:hint="Event Description" />
 
     <EditText
         android:id="@+id/eP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:hint="POC Name" />
+
     <EditText
         android:id="@+id/ePMob"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:hint="POC Mobile"
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/ePEm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:hint="POC Email"
+        android:inputType="textEmailAddress"/>
 
     <EditText
         android:id="@+id/eD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:hint="Event Date *dd/mm/yyyy* format"
+        android:inputType="date"/>
+
     <EditText
         android:id="@+id/eLoc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:hint="Event Location" />
+
     <EditText
         android:id="@+id/eTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:hint="Event Time *21:00* format" />
+
     <EditText
         android:id="@+id/eFee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:hint="Event Fee"
+        android:inputType="number"/>
 
     <Button
         android:id="@+id/eUpdate"
@@ -63,15 +82,17 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="20dp"
-        android:text="Update" />
+        android:background="@drawable/btn"
+        android:text="Edit" />
 
     <Button
         android:id="@+id/eDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="200dp"
-        android:text="Delete"
-        android:layout_marginTop="-49dp"/>
+        android:layout_marginTop="-49dp"
+        android:background="@drawable/btn"
+        android:text="Delete" />
 
 
 </LinearLayout>

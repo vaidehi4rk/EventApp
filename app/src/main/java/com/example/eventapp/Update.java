@@ -10,12 +10,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
 public class Update extends AppCompatActivity {
 
     DatabaseHelper db;
+    LinearLayout linearLayout;
     String name,evname;
     EditText eN,eDes,eP,ePMob,ePEm,eD,eLoc,eTime,eFee;
     Button eUpdate,eDelete;
@@ -47,6 +49,7 @@ public class Update extends AppCompatActivity {
         eP=(EditText)findViewById(R.id.eP);
         eUpdate=(Button)findViewById(R.id.eUpdate);
         eDelete=(Button)findViewById(R.id.eDelete);
+        linearLayout=(LinearLayout)findViewById(R.id.updatePanel);
 
 
         db=new DatabaseHelper(this);
@@ -72,20 +75,92 @@ public class Update extends AppCompatActivity {
             }
 
         }
+
+        //Disabled Edit Text before updating
+        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+            View view = linearLayout.getChildAt(i);
+            if (view instanceof EditText)
+            {
+                EditText editText = (EditText) view;
+                editText.setEnabled(false);
+            }
+        }
+
         eUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean res=db.updateEvents(eventid,eN.getText().toString(),eDes.getText().toString(),eP.getText().toString(),ePMob.getText().toString(),
-                ePEm.getText().toString(),eD.getText().toString(),eTime.getText().toString(),eLoc.getText().toString(),eFee.getText().toString());
-                if(res==true)
+
+                //Enabling Edit texts to write
+                for (int i = 0; i < linearLayout.getChildCount(); i++)
                 {
-                    Toast.makeText(getApplicationContext(), "Event Details Updated Successfully!", Toast.LENGTH_SHORT).show();
+                    View view = linearLayout.getChildAt(i);
+                    if (view instanceof EditText) {
+                        EditText editText = (EditText) view;
+                        editText.setEnabled(true);
+                    }
                 }
-                else
+
+                if(eUpdate.getText().equals("Edit"))
                 {
-                    Toast.makeText(getApplicationContext(), "Something Went Wrong! Please Try Again.", Toast.LENGTH_SHORT).show();
+                    eUpdate.setText("Update");
                 }
+
+                else if(eUpdate.getText().equals("Update"))
+
+                {
+                    //validating if user keeps the text field empty
+                    boolean checkFields = validate(new EditText[]
+                            {
+                                    eN,eDes,eP,ePMob,ePEm,eD,eTime,eLoc,eFee
+                            });
+
+                    if (checkFields == true)
+                    {
+
+                        boolean res=db.updateEvents(eventid,eN.getText().toString(),eDes.getText().toString(),eP.getText().toString(),ePMob.getText().toString(),
+                                ePEm.getText().toString(),eD.getText().toString(),eTime.getText().toString(),eLoc.getText().toString(),eFee.getText().toString());
+                        if(res==true)
+                        {
+                            Toast.makeText(getApplicationContext(), "Event Details Updated Successfully!", Toast.LENGTH_SHORT).show();
+                            Intent intent= new Intent(getApplicationContext(),ViewEvents.class);
+                            startActivity(intent);
+                        }
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(), "Something Went Wrong! Please Try Again.", Toast.LENGTH_SHORT).show();
+                        }
+                        eUpdate.setText("Edit");
+                        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+                            View view = linearLayout.getChildAt(i);
+                            if (view instanceof EditText)
+                            {
+                                EditText editText = (EditText) view;
+                                editText.setEnabled(false);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(), "Please fill all the details.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
             }
+
+            private boolean validate(EditText[] editTexts)
+            {
+                for (int i = 0; i < editTexts.length; i++)
+                {
+                    EditText currentField = editTexts[i];
+                    if (currentField.getText().toString().length() <= 0)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+
         });
 
 
